@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'animate.css';
 
 import { createStage, checkCollision } from '../gameHelpers';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
@@ -13,6 +14,10 @@ import { useGameStatus } from '../hooks/useGameStatus';
 import Stage from './Stage';
 import Display from './Display';
 import StartButton from './StartButton';
+// import Welcome from './Welcome';
+import './Tetris.scss'
+
+
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
@@ -108,6 +113,7 @@ const Tetris = () => {
       onKeyUp={keyUp}
     >
       <StyledTetris>
+    
         <Stage stage={stage} />
         <aside>
           {gameOver ? (
@@ -122,6 +128,19 @@ const Tetris = () => {
           <StartButton callback={startGame} />
         </aside>
       </StyledTetris>
+        <div className="welcome">
+        <h1 class="animate__animated animate__lightSpeedInLeft">Welcome to Tetris with React!</h1>
+          <h3>
+          To get started playing press 'START GAME'. Move your piece with your left and right arrow.
+          Rotate your piece using the UP arrow.And move your piece down with the DOWN arrow.<br /><br />
+          This application was made by Alex Randolph to continue <br />learning JavaScript & React.
+          <br />
+          <br />
+          </h3>
+          <div className="links">
+          <a href="https://www.alexgrandolph.dev/" target="_blank">Portfolio</a> <a>||</a> <a href="https://github.com/alexGrandolph" target="_blank">GitHub</a> <a>||</a>  <a href="https://www.linkedin.com/in/alexgrandolph/" target="_blank">LinkedIn</a> 
+          </div>
+        </div>
     </StyledTetrisWrapper>
   );
 };
