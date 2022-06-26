@@ -18,7 +18,7 @@ import StartButton from './StartButton';
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
-  const [gameOver, setGamerOver] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [stage, setStage] = useStage(player);
@@ -30,16 +30,27 @@ const Tetris = () => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
       updatePlayerPos({ x: dir, y: 0 });
     }
-  }
+  };
 
   const startGame = () => {
     //reset everything
     setStage(createStage());
     resetPlayer();
-  }
+    setGameOver(false);
+  };
 
   const drop = () => {
+    if (!checkCollision(player, stage, { x: 0, y: 1})) {
     updatePlayerPos({ x: 0, y: 1, collided: false })
+    } else {
+      // game over 
+      if (player.pos.y < 1) {
+        console.log("Game Over!");
+        setGameOver(true);
+        setDropTime(null);
+      }
+      updatePlayerPos({ x: 0, y: 10, collided: true });
+    }
   }
     
   const dropPlayer = () => {
